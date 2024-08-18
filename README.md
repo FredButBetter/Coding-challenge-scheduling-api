@@ -22,49 +22,49 @@ The Flask server will start, and you can now use the api via localhost on port 5
 
 ## Endpoints
 
-/api/providers
-    GET - Lists all providers
-    POST - create new provider
-        Required JSON - "name" : string
+* /api/providers
+*     GET - Lists all providers
+*     POST - create new provider
+*         Required JSON - "name" : string
 
-/api/providers/{provider_id}
-    GET - Lists provider with matching ID
-    PUT - updates name of matching provider
-        Required JSON - "name" : string
-    DELETE - deletes matching provider
+* /api/providers/{provider_id}
+*     GET - Lists provider with matching ID
+*     PUT - updates name of matching provider
+*         Required JSON - "name" : string* 
+*     DELETE - deletes matching provider
 
-/api/providers/availability/{provider_id}
-    GET - Lists available appointment slots for matching provider
-    POST - Create new appointment slots for matching provider
-        Required JSON - "start_datetime": start date string in "YYYY-MM-DD HH:MM:00" format, minutes must be on division of 15 minutes
-                        "end_datetime": end date string in "YYYY-MM-DD HH:MM:00" format
+* /api/providers/availability/{provider_id}
+*     GET - Lists available appointment slots for matching provider
+*     POST - Create new appointment slots for matching provider
+*         Required JSON - "start_datetime": start date string in "YYYY-MM-DD HH:MM:00" format, minutes must be on division of 15 minutes
+*                         "end_datetime": end date string in "YYYY-MM-DD HH:MM:00" format
                         
-/api/clients
-    GET - Lists all clients
-    POST - create new client
-        Required JSON - "name" : string
+* /api/clients
+*     GET - Lists all clients
+*     POST - create new client
+*         Required JSON - "name" : string
 
-/api/clients/{client_id}
-    GET - Lists client with matching ID
-    PUT - updates name of matching client
-        Required JSON - "name" : string
-    DELETE - deletes matching client
+* /api/clients/{client_id}
+*     GET - Lists client with matching ID
+*     PUT - updates name of matching client
+*         Required JSON - "name" : string
+*     DELETE - deletes matching client
 
-/api/appointments
-    GET - returns all appointments, both reservered and available, for all providers
+* /api/appointments
+*     GET - returns all appointments, both reservered and available, for all providers
 
-/api/appointments/reserve
-    GET - returns all appointments which are available for reservation
-        side effect - grooms all appointments to check for unconfirmed reservation attempts
+* /api/appointments/reserve
+*     GET - returns all appointments which are available for reservation
+*         side effect - grooms all appointments to check for unconfirmed reservation attempts
 
-/api/appointments/reserve/id
-    POST - reserve the appointment with matching appointment id for client with matching client_id
-        Required JSON - "client_id" : int
-        side effect - grooms all appointments to check for unconfirmed reservation attempts
+* /api/appointments/reserve/id
+*     POST - reserve the appointment with matching appointment id for client with matching client_id
+*         Required JSON - "client_id" : int
+*         side effect - grooms all appointments to check for unconfirmed reservation attempts
 
-/api/appointments/confirm/id
-    POST - confirm the pending appointment with matching appointment id
-        side effect - grooms all appointments to check for unconfirmed reservation attempts
+* /api/appointments/confirm/id
+*     POST - confirm the pending appointment with matching appointment id
+*         side effect - grooms all appointments to check for unconfirmed reservation attempts
 
 
 
