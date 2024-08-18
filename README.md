@@ -1,5 +1,5 @@
 ## Overview
-This is my submission to the Henry Meds coding test. It is a Flask based API which 
+This is my submission to the Henry Meds coding test.
 
 My thought process behind tradeoffs was to try to get as much of the API functionality working as possible in the time allotted, while trading-off anything that wouldn't impact performance for the sake of the time limit.
 
@@ -15,8 +15,8 @@ These are the main limitations as I see them:
 
 1. Clone this git repo 
 2. Navigate into the HenryMeds folder just cloned
-3. Install required packages - pip install ./requirements.txt
-4. Run app.py - python ./App/app.py
+3. Install required packages - pip install -r ./requirements.txt
+4. Run app.py - python3 ./App/app.py
 
 The Flask server will start, and you can now use the api via localhost on port 5000
 
@@ -38,12 +38,11 @@ The Flask server will start, and you can now use the api via localhost on port 5
     POST - Create new appointment slots for matching provider
         Required JSON - "start_datetime": start date string in "YYYY-MM-DD HH:MM:00" format, minutes must be on division of 15 minutes
                         "end_datetime": end date string in "YYYY-MM-DD HH:MM:00" format
-
+                        
 /api/clients
     GET - Lists all clients
     POST - create new client
         Required JSON - "name" : string
-
 
 /api/clients/{client_id}
     GET - Lists client with matching ID
