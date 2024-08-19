@@ -9,63 +9,65 @@ These are the main limitations as I see them:
 * No user authentication, for example providers should only be able to change their own availability with a user/pass etc.
 * Lots of suboptimal searching through the fake-database dictionaries, which would be orders of magnitude slower than SQL at production scale
 * Needs more fleshed out functionality, i.e. removing blocks of availability, updating more fields, more input grooming / checking, etc.
-* resources.py should be split up into providers.py, clients.py, etc. 
+* resources.py should be split up into providers.py, clients.py, etc.
+* Small edge case bug - The check to stop duplicate availability creation doesn't seem to work
 
 ## Running
 
 1. Clone this git repo 
 2. Navigate into the HenryMeds folder just cloned
 3. Install required packages - pip install -r ./requirements.txt
-4. Run app.py - python3 ./App/app.py
+4. Run app.py - python3 ./App/__init__.py
 
 The Flask server will start, and you can now use the api via localhost on port 5000
 
 ## Endpoints
 
-* /api/providers
-*     GET - Lists all providers
-*     POST - create new provider
-*         Required JSON - "name" : string
+```
+/api/providers
+     GET - Lists all providers
+     POST - create new provider
+         Required JSON - "name" : string
 
-* /api/providers/{provider_id}
-*     GET - Lists provider with matching ID
-*     PUT - updates name of matching provider
-*         Required JSON - "name" : string* 
-*     DELETE - deletes matching provider
-
-* /api/providers/availability/{provider_id}
-*     GET - Lists available appointment slots for matching provider
-*     POST - Create new appointment slots for matching provider
-*         Required JSON - "start_datetime": start date string in "YYYY-MM-DD HH:MM:00" format, minutes must be on division of 15 minutes
-*                         "end_datetime": end date string in "YYYY-MM-DD HH:MM:00" format
+ /api/providers/{provider_id}
+     GET - Lists provider with matching ID
+     PUT - updates name of matching provider
+         Required JSON - "name" : string* 
+     DELETE - deletes matching provider
+     
+ /api/providers/availability/{provider_id}
+     GET - Lists available appointment slots for matching provider
+     POST - Create new appointment slots for matching provider
+         Required JSON - "start_datetime": start date string in "YYYY-MM-DD HH:MM:00" format, minutes must be on division of 15 minutes
+                         "end_datetime": end date string in "YYYY-MM-DD HH:MM:00" format
                         
-* /api/clients
-*     GET - Lists all clients
-*     POST - create new client
-*         Required JSON - "name" : string
+ /api/clients
+     GET - Lists all clients
+     POST - create new client
+         Required JSON - "name" : string
 
-* /api/clients/{client_id}
-*     GET - Lists client with matching ID
-*     PUT - updates name of matching client
-*         Required JSON - "name" : string
-*     DELETE - deletes matching client
+ /api/clients/{client_id}
+     GET - Lists client with matching ID
+     PUT - updates name of matching client
+         Required JSON - "name" : string
+     DELETE - deletes matching client
 
-* /api/appointments
-*     GET - returns all appointments, both reservered and available, for all providers
+ /api/appointments
+     GET - returns all appointments, both reservered and available, for all providers
 
-* /api/appointments/reserve
-*     GET - returns all appointments which are available for reservation
-*         side effect - grooms all appointments to check for unconfirmed reservation attempts
+ /api/appointments/reserve
+     GET - returns all appointments which are available for reservation
+         side effect - grooms all appointments to check for unconfirmed reservation attempts
 
-* /api/appointments/reserve/id
-*     POST - reserve the appointment with matching appointment id for client with matching client_id
-*         Required JSON - "client_id" : int
-*         side effect - grooms all appointments to check for unconfirmed reservation attempts
+ /api/appointments/reserve/id
+     POST - reserve the appointment with matching appointment id for client with matching client_id
+         Required JSON - "client_id" : int
+         side effect - grooms all appointments to check for unconfirmed reservation attempts
 
-* /api/appointments/confirm/id
-*     POST - confirm the pending appointment with matching appointment id
-*         side effect - grooms all appointments to check for unconfirmed reservation attempts
-
+ /api/appointments/confirm/id
+     POST - confirm the pending appointment with matching appointment id
+         side effect - grooms all appointments to check for unconfirmed reservation attempts
+```
 
 
 Intended workflow for reservation - 
